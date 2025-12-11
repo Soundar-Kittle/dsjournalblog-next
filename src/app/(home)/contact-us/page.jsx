@@ -14,7 +14,7 @@ export default async function Page() {
   const settings = await getSettings();
 
   return (
-    <main className="bg-white">
+    <div className="bg-white">
       <PageHeader title="Contact Us" />
       <Breadcrumbs
         parents={[{ menu_label: "Contact Us", menu_link: "/contact-us" }]}
@@ -101,6 +101,6 @@ export default async function Page() {
           </div>
         </div>
       </div>
-    </main>
+    </div>
   );
 }

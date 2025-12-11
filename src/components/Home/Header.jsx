@@ -11,6 +11,7 @@ const NAV = [
   { label: "Authors", href: "/for-authors" },
   { label: "Reviewers", href: "/for-reviewers" },
   { label: "Editors", href: "/for-editors" },
+  { label: "Blog", href: "/blog" },
 ];
 
 export default function Header({ settings }) {
@@ -34,16 +35,14 @@ export default function Header({ settings }) {
     const isActive = pathname === href || pathname?.startsWith(href + "/");
     return `
       relative transition duration-300 text-base
-      ${
-        isActive
-          ? "text-primary font-semibold"
-          : "text-slate-700 hover:text-primary"
+      ${isActive
+        ? "text-primary font-semibold"
+        : "text-slate-700 hover:text-primary"
       }
       after:absolute after:left-0 after:bottom-[-4px] after:h-[3px] after:w-full after:rounded 
-      ${
-        isActive
-          ? "after:bg-primary"
-          : "after:bg-primary after:scale-x-0 hover:after:scale-x-100"
+      ${isActive
+        ? "after:bg-primary"
+        : "after:bg-primary after:scale-x-0 hover:after:scale-x-100"
       }
       after:origin-center after:transition-transform after:duration-300
     `;

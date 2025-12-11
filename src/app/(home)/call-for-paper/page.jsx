@@ -14,7 +14,7 @@ export default async function page() {
   const date = moment(data?.manual_date).format("Do MMMM YYYY");
 
   return (
-    <main className="bg-white">
+    <div className="bg-white">
       <PageHeader title="Call for Paper" />
       <Breadcrumbs
         parents={[
@@ -101,6 +101,6 @@ export default async function page() {
           service.
         </p>
       </div>
-    </main>
+    </div>
   );
 }
