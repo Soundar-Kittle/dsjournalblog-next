@@ -6,3 +6,76 @@ datasource db {
   provider     = "mysql"
   relationMode = "prisma"
 }
+
+/* -------------------------
+    BLOG AUTHOR
+-------------------------- */
+model BlogAuthor {
+  id        Int        @id @default(autoincrement())
+  name      String
+  email     String?    @unique
+  avatar    String?
+  bio       String?    @db.Text
+  posts     BlogPost[]
+
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+}
+
+/* -------------------------
+    BLOG CATEGORY
+-------------------------- */
+model BlogCategory {
+  id        Int         @id @default(autoincrement())
+  name      String
+  slug      String      @unique
+  posts     BlogPost[]  @relation("PostCategories")
+
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+}
+
+/* -------------------------
+    BLOG TAG
+-------------------------- */
+model BlogTag {
+  id        Int         @id @default(autoincrement())
+  name      String
+  slug      String      @unique
+  posts     BlogPost[]  @relation("PostTags")
+
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+}
+
+/* -------------------------
+    BLOG POST
+-------------------------- */
+model BlogPost {
+  id           Int            @id @default(autoincrement())
+  slug         String         @unique
+  title        String
+  excerpt      String?        @db.VarChar(500)
+  content      String         @db.LongText
+  coverImage   String?        @db.VarChar(500)
+
+  status       PostStatus     @default(DRAFT)
+  publishedAt  DateTime?
+
+  author       BlogAuthor?    @relation(fields: [authorId], references: [id])
+  authorId     Int?
+
+  categories   BlogCategory[] @relation("PostCategories")
+  tags         BlogTag[]      @relation("PostTags")
+
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+}
+
+/* -------------------------
+    ENUM STATUS
+-------------------------- */
+enum PostStatus {
+  DRAFT
+  PUBLISHED
+}
