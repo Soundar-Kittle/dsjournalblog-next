@@ -1,22 +1,67 @@
+// import { notFound } from "next/navigation";
+// import PageHeader from "@/components/Home/PageHeader";
+// import Breadcrumbs from "@/components/ui/Breadcrumbs";
+
+
+// export async function generateStaticParams() {
+//     return []; // add slugs if needed
+// }
+
+// export default async function BlogPost({ params }) {
+//     const { slug } = params;
+
+//     const tables = await blogPrisma.$queryRaw`SHOW TABLES`;
+
+//     // Example: Replace with DB/API call
+//     const article = {
+//         title: `Blog: ${slug}`,
+//         content: "<p>This is a dynamic blog article page.</p>",
+//     };
+
+//     if (!article) return notFound();
+
+//     return (
+//         <div className="bg-white">
+//             <PageHeader title="Blog" />
+//             <Breadcrumbs
+//                 parents={[{ menu_label: "Blog", menu_link: "/blog" }]}
+//             />
+//             <div className="">
+//                 <h1 className="text-4xl font-bold mb-6">{article?.title ? article?.title : ""}</h1>
+
+//                  <div
+//                     className="prose"
+//                     dangerouslySetInnerHTML={{ __html: article?.content ? article?.content : "" }}
+//                 /> 
+//                 
+
+//             </div>
+//         </div>
+//     );
+// }
+
+export const runtime = "nodejs";
+
 import { notFound } from "next/navigation";
 import PageHeader from "@/components/Home/PageHeader";
 import Breadcrumbs from "@/components/ui/Breadcrumbs";
-
+import { prisma } from "@/lib/prisma";
 
 export async function generateStaticParams() {
     return []; // add slugs if needed
 }
 
 export default async function BlogPost({ params }) {
-    const { slug } = params;
 
-    // Example: Replace with DB/API call
-    const article = {
-        title: `Blog: ${slug}`,
-        content: "<p>This is a dynamic blog article page.</p>",
-    };
+    const tables = await prisma.$queryRaw`SHOW TABLES`;
 
-    if (!article) return notFound();
+    // // Example: Replace with DB/API call
+    // const article = {
+    //     title: `Blog: ${slug}`,
+    //     content: "<p>This is a dynamic blog article page.</p>",
+    // };
+
+    // if (!article) return notFound();
 
     return (
         <div className="bg-white">
@@ -25,13 +70,13 @@ export default async function BlogPost({ params }) {
                 parents={[{ menu_label: "Blog", menu_link: "/blog" }]}
             />
             <div className="">
-                <h1 className="text-4xl font-bold mb-6">{article?.title ? article?.title : ""}</h1>
+                {/* <h1 className="text-4xl font-bold mb-6">{article?.title ? article?.title : ""}</h1> */}
+                <pre className="p-6">
+                    {JSON.stringify(tables, null, 2)}
+                </pre>
 
-                <div
-                    className="prose"
-                    dangerouslySetInnerHTML={{ __html: article?.content ? article?.content : "" }}
-                />
             </div>
         </div>
     );
 }
+

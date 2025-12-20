@@ -161,7 +161,7 @@
   padding: 0.75rem !important;
   border-radius: 0.375rem !important;
   background-color: #fff !important;
-  border: 1px solid #e5e7eb !important; /* Tailwind gray-200 */
+  border: 1px solid #e5e7eb !important;
   font-family: system-ui, sans-serif !important;
   font-size: 0.95rem !important;
   line-height: 1.5;
@@ -177,4 +177,25 @@
 .ck.ck-editor__main > .ck-editor__editable {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
+}
+
+/* =============================
+   🔥 CRITICAL CKEditor FIX
+============================= */
+
+/* This invisible wrapper blocks clicks */
+.ck-body-wrapper {
+  pointer-events: none !important;   /* ✅ REQUIRED */
+}
+
+/* Re-enable pointer events inside the editor only */
+.ck-editor,
+.ck-editor * {
+  pointer-events: auto;
+}
+
+/* Keep editor in normal stacking context */
+.ck-editor {
+  position: relative;
+  z-index: 1;
 }

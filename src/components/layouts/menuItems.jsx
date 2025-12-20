@@ -64,6 +64,11 @@ export const getMenuItems = (role) => {
         ],
       },
       {
+        title: "Blog",
+        path: `${adminPath}/blog`,
+        icon: <BookImage size={18} />,
+      },
+      {
         title: "Meta",
         path: `${adminPath}/meta`,
         icon: <ChevronsLeftRight size={18} />,

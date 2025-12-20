@@ -4,12 +4,13 @@ generator client {
 
 datasource db {
   provider     = "mysql"
+  url          = env("DATABASE_URL")
   relationMode = "prisma"
 }
 
-/* -------------------------
-    BLOG AUTHOR
--------------------------- */
+// -------------------------
+// BLOG AUTHOR
+// -------------------------
 model BlogAuthor {
   id        Int        @id @default(autoincrement())
   name      String
@@ -22,9 +23,9 @@ model BlogAuthor {
   updatedAt DateTime   @updatedAt
 }
 
-/* -------------------------
-    BLOG CATEGORY
--------------------------- */
+// -------------------------
+// BLOG CATEGORY
+// -------------------------
 model BlogCategory {
   id        Int         @id @default(autoincrement())
   name      String
@@ -35,9 +36,9 @@ model BlogCategory {
   updatedAt DateTime    @updatedAt
 }
 
-/* -------------------------
-    BLOG TAG
--------------------------- */
+// -------------------------
+// BLOG TAG
+// -------------------------
 model BlogTag {
   id        Int         @id @default(autoincrement())
   name      String
@@ -48,9 +49,9 @@ model BlogTag {
   updatedAt DateTime    @updatedAt
 }
 
-/* -------------------------
-    BLOG POST
--------------------------- */
+// -------------------------
+// BLOG POST
+// -------------------------
 model BlogPost {
   id           Int            @id @default(autoincrement())
   slug         String         @unique
@@ -72,9 +73,9 @@ model BlogPost {
   updatedAt    DateTime       @updatedAt
 }
 
-/* -------------------------
-    ENUM STATUS
--------------------------- */
+// -------------------------
+// ENUM STATUS
+// -------------------------
 enum PostStatus {
   DRAFT
   PUBLISHED

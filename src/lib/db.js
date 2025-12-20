@@ -1,15 +1,33 @@
-// lib/db.js
+// // lib/db.js
+// import mysql from "mysql2/promise";
+
+// export async function createDbConnection() {
+//   const connection = await mysql.createConnection({
+//     host: process.env.DB_HOST,
+//     user: process.env.DB_USER,
+//     password: process.env.DB_PASSWORD,
+//     database: process.env.DB_NAME,
+//     waitForConnections: true,
+//     connectionLimit: 10,
+//     queueLimit: 0,
+//   });
+//   return connection;
+// }
+
 import mysql from "mysql2/promise";
 
-export async function createDbConnection() {
-  const connection = await mysql.createConnection({
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME,
-    waitForConnections: true,
-    connectionLimit: 10,
-    queueLimit: 0,
-  });
+let connection;
+
+export function createDbConnection() {
+  if (!connection) {
+    connection = mysql.createPool({
+      host: process.env.DB_HOST,
+      user: process.env.DB_USER,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_NAME,
+      waitForConnections: true,
+      connectionLimit: 10,
+    });
+  }
   return connection;
 }
